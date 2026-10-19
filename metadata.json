@@ -1,0 +1,6 @@
+{
+  "name": "PNG UniHR - University HR & Staff Operations System",
+  "description": "Comprehensive Human Resource Management and Staff Operations System for Papua New Guinea Universities managing faculty payroll, staff loans, leave tracking, vacancies, digital contracting, performance appraisals, and institutional integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
