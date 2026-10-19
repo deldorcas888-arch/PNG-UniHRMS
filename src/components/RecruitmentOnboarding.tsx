@@ -1292,8 +1292,8 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
       {/* Modal 1: Apply for University Vacancy Modal */}
       {applyingJobOpening && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-2xl w-full p-6 space-y-4 max-h-[92vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/50 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-2xl w-full p-4 sm:p-6 space-y-4 max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div>
                 <span className="text-[11px] font-mono text-amber-700 font-semibold">
@@ -1620,8 +1620,8 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
       {/* Modal 2: Candidate Dossier View */}
       {selectedApplicantDossier && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-lg w-full p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/50 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-lg w-full p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div className="flex items-center gap-2">
                 <GraduationCap className="w-5 h-5 text-purple-700" />
@@ -1760,8 +1760,8 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
       {/* Modal 3: University Employment Contract Generator & Acceptance Form */}
       {selectedApplicantForContract && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/50 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-xl w-full p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div className="flex items-center gap-2">
                 <FileSignature className="w-5 h-5 text-purple-700" />
@@ -2169,8 +2169,8 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
       {/* Modal 5: Post New Job Vacancy (HR/Admin) */}
       {isNewJobModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-lg w-full p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/50 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-lg w-full p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div className="flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-neutral-900" />
@@ -2292,8 +2292,8 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
       {/* Modal 6: Onboarding Document Upload & Verification */}
       {selectedTaskForDocs && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/50 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-xl w-full p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div className="flex items-center gap-2">
                 <Paperclip className="w-5 h-5 text-amber-600" />
@@ -2490,8 +2490,8 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
       {/* Modal 7: Document Inspection & Attestation Preview Modal */}
       {previewingAttachment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/60 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-2xl border border-neutral-300 max-w-lg w-full p-6 space-y-4 max-h-[92vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/60 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-2xl border border-neutral-300 max-w-lg w-full p-4 sm:p-6 space-y-4 max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-purple-700" />

@@ -315,8 +315,8 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
 
       {/* Faculty Dossier Modal */}
       {selectedFacultyDetails && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl max-w-lg w-full p-6 shadow-2xl relative border border-neutral-200 my-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl max-w-lg w-full p-4 sm:p-6 shadow-2xl relative border border-neutral-200 my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setSelectedFacultyDetails(null)}
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-md"
@@ -413,8 +413,8 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
 
       {/* Add Faculty Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl max-w-xl w-full p-6 shadow-2xl relative border border-neutral-200 my-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl max-w-xl w-full p-4 sm:p-6 shadow-2xl relative border border-neutral-200 my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
             <button
               onClick={handleCloseModal}
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-md"

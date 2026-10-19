@@ -352,8 +352,8 @@ export const AttendanceTimesheet: React.FC<AttendanceTimesheetProps> = ({
 
       {/* Clock-in Modal */}
       {isClockInModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs">
-          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-md w-full p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-neutral-950/50 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-xl border border-neutral-200 max-w-md w-full p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-neutral-900" />

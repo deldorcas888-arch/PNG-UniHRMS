@@ -569,8 +569,6 @@ export default function App() {
       {/* Top Header */}
       <Header
         currentUniversity={currentUniversity}
-        universities={PNG_UNIVERSITIES}
-        onSelectUniversity={(uni) => setCurrentUniversity(uni)}
         currentUser={currentUser}
         users={MOCK_USERS}
         onSelectUser={handleSelectUser}
@@ -582,14 +580,14 @@ export default function App() {
 
       {/* RBAC Role Context Strip */}
       <div className="bg-neutral-900 text-neutral-300 text-xs border-b border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
-            <span className="flex items-center gap-1 font-semibold text-white">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex flex-col md:flex-row md:items-center justify-between gap-2.5">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="flex items-center gap-1 font-semibold text-white whitespace-nowrap">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
               Active Role: <strong className="text-amber-400">{currentUser.role}</strong>
             </span>
-            <span aria-hidden="true" className="text-neutral-600">·</span>
-            <span className="text-neutral-400">
+            <span aria-hidden="true" className="text-neutral-600 hidden sm:inline">·</span>
+            <span className="text-neutral-400 text-[11px] sm:text-xs">
               {currentUser.role === 'Administrator' && 'Full system authority across Payroll, Staff Loans, Approvals, Recruitment & HR Analytics.'}
               {currentUser.role === 'HR Manager' && 'Authority to approve leave requests, staff loans, manage recruitment, attendance & appraisals.'}
               {currentUser.role === 'Employee' && 'Staff self-service access: request leave, apply for loans, clock attendance, view payslips & dossier.'}
@@ -597,8 +595,8 @@ export default function App() {
           </div>
 
           {/* Quick RBAC Role Simulator Buttons & Contact Hint */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-[11px] text-neutral-500 mr-1 hidden lg:inline">Simulate Role:</span>
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 shrink-0">
+            <span className="text-[11px] text-neutral-500 mr-0.5 hidden lg:inline">Simulate Role:</span>
             {MOCK_USERS.map((user) => {
               const isActive = currentUser.id === user.id;
               return (
@@ -619,9 +617,9 @@ export default function App() {
 
             <button
               onClick={() => handleSelectTab('integration')}
-              className="ml-2 text-amber-400 hover:text-amber-300 text-[11px] font-semibold flex items-center gap-1 underline underline-offset-2"
+              className="ml-1 sm:ml-2 text-amber-400 hover:text-amber-300 text-[11px] font-semibold flex items-center gap-1 underline underline-offset-2 whitespace-nowrap"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3 h-3 shrink-0" />
               <span>Contact to Integrate</span>
             </button>
           </div>
@@ -629,7 +627,7 @@ export default function App() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Campus & Institution Banner with HR Quick Actions */}
         <UniversityBanner
           university={currentUniversity}
