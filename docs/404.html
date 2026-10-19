@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PNG UniHR — Page Not Found & Route Recovery</title>
+    <meta name="description" content="Route recovery and quick links for PNG UniHR University HR & Payroll System." />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // GitHub Pages SPA Single-Page Route Recovery
+      (function() {
+        var path = window.location.pathname;
+        var segments = path.split('/').filter(Boolean);
+        var lastSeg = segments[segments.length - 1] || '';
+        
+        // Map known route segments to HTML pages or query tabs
+        var routeMap = {
+          'vacancies': 'vacancies.html',
+          'recruitment': 'vacancies.html',
+          'jobs': 'vacancies.html',
+          'onboarding': 'onboarding.html',
+          'payroll': 'payroll.html',
+          'leave': 'leave.html',
+          'loans': 'loans.html',
+          'approvals': 'approvals.html',
+          'attendance': 'attendance.html',
+          'performance': 'performance.html',
+          'faculty': 'faculty.html',
+          'reports': 'reports.html',
+          'integration': 'integration.html'
+        };
+
+        var targetPage = routeMap[lastSeg.toLowerCase().replace('.html', '')];
+        if (targetPage && !path.endsWith(targetPage)) {
+          var base = path.substring(0, path.lastIndexOf('/') + 1);
+          window.location.replace(base + targetPage + window.location.search + window.location.hash);
+        }
+      })();
+    </script>
+    <style>body{color:#f8fafc;background-color:#0f172a;justify-content:center;align-items:center;min-height:100vh;margin:0;padding:1.5rem;font-family:Plus Jakarta Sans,system-ui,-apple-system,sans-serif;display:flex}.card{background:#1e293b;border:1px solid #334155;border-radius:1rem;width:100%;max-width:38rem;padding:2.5rem;box-shadow:0 25px 50px -12px #00000080}.badge{color:#fbbf24;letter-spacing:.05em;text-transform:uppercase;background:#f59e0b22;border:1px solid #f59e0b44;border-radius:9999px;margin-bottom:1rem;padding:.25rem .75rem;font-size:.75rem;font-weight:600;display:inline-block}h1{color:#fff;margin:0 0 .5rem;font-size:1.5rem;font-weight:700}p{color:#94a3b8;margin:0 0 1.5rem;font-size:.925rem;line-height:1.5}.grid{grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.75rem;margin-bottom:1.5rem;display:grid}.link-btn{color:#e2e8f0;background:#0f172a;border:1px solid #334155;border-radius:.5rem;padding:.625rem .875rem;font-size:.8rem;font-weight:500;text-decoration:none;transition:all .2s;display:block}.link-btn:hover{color:#fbbf24;background:#334155;border-color:#f59e0b}.btn-primary{color:#0f172a;background:#f59e0b;border-radius:.5rem;justify-content:center;align-items:center;width:100%;padding:.75rem 1.25rem;font-size:.875rem;font-weight:700;text-decoration:none;transition:background-color .2s;display:inline-flex}.btn-primary:hover{background:#fbbf24}</style>
+  </head>
+  <body>
+    <div class="card">
+      <span class="badge">PNG UniHR Navigation</span>
+      <h1>Papua New Guinea University HRMS</h1>
+      <p>Select a module below to open its dedicated view in your browser tab:</p>
+      
+      <div class="grid">
+        <a href="./index.html" class="link-btn">📊 Main Dashboard</a>
+        <a href="./vacancies.html" class="link-btn">💼 Job Vacancies</a>
+        <a href="./onboarding.html" class="link-btn">📋 Staff Onboarding</a>
+        <a href="./payroll.html" class="link-btn">💰 Statutory Payroll</a>
+        <a href="./leave.html" class="link-btn">🌴 Leave & Kastom</a>
+        <a href="./loans.html" class="link-btn">💳 Staff Loans</a>
+        <a href="./approvals.html" class="link-btn">✅ Approvals Hub</a>
+        <a href="./attendance.html" class="link-btn">⏱️ Timesheets</a>
+        <a href="./performance.html" class="link-btn">⭐ Appraisals</a>
+        <a href="./faculty.html" class="link-btn">👥 Faculty Directory</a>
+        <a href="./reports.html" class="link-btn">📑 Audit Reports</a>
+        <a href="./integration.html" class="link-btn">🏛️ Integration Portal</a>
+      </div>
+
+      <a href="./index.html" class="btn-primary">Return to Main System</a>
+    </div>
+  </body>
+</html>

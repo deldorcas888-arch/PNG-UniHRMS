@@ -116,6 +116,35 @@ Comprehensive reporting engine with date range filters (presets + custom pickers
 
 ---
 
+## HTML Pages for Browser Tabs & GitHub Repository Hosting
+
+The web application is equipped with standalone, search-optimized HTML pages with embedded favicons and dynamic browser tab title synchronization. When opened in browser tabs from a GitHub repository or hosted via **GitHub Pages**, each page displays its dedicated title, icon, and module:
+
+| HTML Page | Browser Tab Title | Module Description |
+| :--- | :--- | :--- |
+| `index.html` | **PNG UniHR — University HRMS & Statutory Payroll Portal** | Master Dashboard & Operations Hub |
+| `vacancies.html` | **Job Vacancies & Applications — PNG UniHR** | Vacancy board, candidate applications & digital contracting |
+| `onboarding.html` | **Staff Onboarding & Document Verification — PNG UniHR** | Digital document uploads (IDs, qualifications, tax TIN) & checklists |
+| `payroll.html` | **Statutory Payroll & IRC Tax Engine — PNG UniHR** | PNG 26-fortnight IRC SWT calculation & superannuation engine |
+| `leave.html` | **Staff Leave & Kastom Bereavement — PNG UniHR** | Annual recreation & customary kastom bereavement tracking |
+| `loans.html` | **Staff Loans & Salary Advances — PNG UniHR** | Emergency advances, borrowing eligibility & deduction schedules |
+| `approvals.html` | **Approvals & Governance Hub — PNG UniHR** | Central inbox for leave, loans, contracts & appraisals |
+| `attendance.html` | **Campus Attendance & Timesheets — PNG UniHR** | Daily duty check-ins, lecturing & fortnightly timesheets |
+| `performance.html` | **Academic Appraisals & Reviews — PNG UniHR** | Academic reviews, teaching ratings & promotion recommendations |
+| `faculty.html` | **Faculty & Staff Directory — PNG UniHR** | Academic personnel database & departmental rosters |
+| `reports.html` | **Statutory & Audit Reports — PNG UniHR** | IRC SWT tax audits, Super remittances & DHERST subvention exports |
+| `integration.html` | **University Integration Portal — PNG UniHR** | Multi-campus deployment & NICTA Government Cloud integration |
+| `404.html` | **PNG UniHR — Page Not Found & Route Recovery** | GitHub Pages single-page route recovery & navigation directory |
+
+### GitHub Pages Setup
+1. In your GitHub repository, navigate to **Settings > Pages**.
+2. Under **Build and deployment > Source**, select either:
+   - **GitHub Actions** (using the included `.github/workflows/pages.yml`), or
+   - **Deploy from a branch** > branch: `main` / folder: `/docs` (or `/root`).
+3. Assets use relative base paths (`./`) ensuring all pages and scripts load properly on any repository subfolder.
+
+---
+
 ## Development & Verification
 
 ```bash

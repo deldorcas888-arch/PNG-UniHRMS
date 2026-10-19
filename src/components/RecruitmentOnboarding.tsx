@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { 
   AppUser, 
   AttachmentCategory,
@@ -74,6 +74,8 @@ interface RecruitmentOnboardingProps {
   onVerifyOnboardingAttachment?: (taskId: string, attachmentId: string, officerName: string) => void;
   onDeleteOnboardingAttachment?: (taskId: string, attachmentId: string) => void;
   onUpdateOffboardingStatus: (caseId: string, field: 'libraryClearance' | 'itEquipmentReturned' | 'campusHousingSurrendered' | 'bursarClearance') => void;
+  initialSubTab?: 'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding';
+  onSubTabChange?: (subTab: 'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding') => void;
 }
 
 export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
@@ -99,10 +101,26 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
   onVerifyOnboardingAttachment,
   onDeleteOnboardingAttachment,
   onUpdateOffboardingStatus,
+  initialSubTab,
+  onSubTabChange,
 }) => {
   const isEmployee = currentUser.role === 'Employee';
 
-  const [activeTab, setActiveTab] = useState<'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding'>('openings');
+  const [activeTab, setActiveTab] = useState<'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding'>(initialSubTab || 'openings');
+
+  useEffect(() => {
+    if (initialSubTab && initialSubTab !== activeTab) {
+      setActiveTab(initialSubTab);
+    }
+  }, [initialSubTab]);
+
+  const handleSubTabChange = (tab: 'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding') => {
+    setActiveTab(tab);
+    if (onSubTabChange) {
+      onSubTabChange(tab);
+    }
+  };
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedJobFilter, setSelectedJobFilter] = useState<string>('all');
   const [selectedContractFilter, setSelectedContractFilter] = useState<string>('all');
@@ -604,7 +622,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
       <div className="bg-white p-4 rounded-lg border border-neutral-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <button
-            onClick={() => setActiveTab('openings')}
+            onClick={() => handleSubTabChange('openings')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
               activeTab === 'openings'
                 ? 'bg-neutral-900 text-white'
@@ -615,7 +633,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
           </button>
 
           <button
-            onClick={() => setActiveTab('applicants')}
+            onClick={() => handleSubTabChange('applicants')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 ${
               activeTab === 'applicants'
                 ? 'bg-neutral-900 text-white'
@@ -629,7 +647,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
           </button>
 
           <button
-            onClick={() => setActiveTab('contracts')}
+            onClick={() => handleSubTabChange('contracts')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 ${
               activeTab === 'contracts'
                 ? 'bg-neutral-900 text-white'
@@ -644,7 +662,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
           </button>
 
           <button
-            onClick={() => setActiveTab('onboarding')}
+            onClick={() => handleSubTabChange('onboarding')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 ${
               activeTab === 'onboarding'
                 ? 'bg-neutral-900 text-white'
@@ -660,7 +678,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
 
           {!isEmployee && (
             <button
-              onClick={() => setActiveTab('offboarding')}
+              onClick={() => handleSubTabChange('offboarding')}
               className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
                 activeTab === 'offboarding'
                   ? 'bg-neutral-900 text-white'

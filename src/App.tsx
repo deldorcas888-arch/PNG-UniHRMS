@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   AppUser,
   AttendanceRecord,
@@ -51,10 +51,108 @@ import { ReportingModule } from './components/ReportingModule';
 import { UniversityIntegrationPortal } from './components/UniversityIntegrationPortal';
 import { ShieldCheck, Mail, Sparkles, Building2 } from 'lucide-react';
 
+function getInitialNavigation(): { tab: ActiveNavTab; subTab?: 'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding' } {
+  if (typeof window === 'undefined') {
+    return { tab: 'payroll' };
+  }
+
+  // 1. Check body dataset attribute
+  const bodyTab = document.body?.dataset?.initialTab as ActiveNavTab | undefined;
+  const bodySubTab = document.body?.dataset?.initialSubtab as any;
+
+  // 2. Check query params (?tab=..., ?page=...)
+  const params = new URLSearchParams(window.location.search);
+  const queryTab = params.get('tab') || params.get('page');
+  const querySubTab = params.get('subtab') as any;
+
+  // 3. Check hash (#vacancies, #onboarding, #payroll)
+  const hash = window.location.hash.replace('#', '').toLowerCase();
+
+  // 4. Check pathname (/vacancies.html, /onboarding.html, /payroll.html)
+  const pathname = window.location.pathname.toLowerCase();
+
+  let resolvedTab: ActiveNavTab = 'payroll';
+  let resolvedSubTab: 'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding' | undefined = undefined;
+
+  const candidate = queryTab || hash || (pathname.includes('.html') ? pathname : undefined);
+
+  if (bodyTab) {
+    resolvedTab = bodyTab;
+    resolvedSubTab = bodySubTab;
+  } else if (candidate) {
+    if (candidate.includes('onboard')) {
+      resolvedTab = 'recruitment';
+      resolvedSubTab = 'onboarding';
+    } else if (candidate.includes('vacanc') || candidate.includes('recruit') || candidate.includes('job') || candidate.includes('contract')) {
+      resolvedTab = 'recruitment';
+      resolvedSubTab = 'openings';
+    } else if (candidate.includes('pay') || candidate.includes('tax') || candidate.includes('swt')) {
+      resolvedTab = 'payroll';
+    } else if (candidate.includes('leave')) {
+      resolvedTab = 'leave';
+    } else if (candidate.includes('loan') || candidate.includes('advance')) {
+      resolvedTab = 'loans';
+    } else if (candidate.includes('approval')) {
+      resolvedTab = 'approvals';
+    } else if (candidate.includes('attend') || candidate.includes('timesheet')) {
+      resolvedTab = 'attendance';
+    } else if (candidate.includes('perform') || candidate.includes('apprais')) {
+      resolvedTab = 'performance';
+    } else if (candidate.includes('facult') || candidate.includes('director') || candidate.includes('staff')) {
+      resolvedTab = 'faculty';
+    } else if (candidate.includes('report') || candidate.includes('audit')) {
+      resolvedTab = 'reports';
+    } else if (candidate.includes('integ') || candidate.includes('portal')) {
+      resolvedTab = 'integration';
+    }
+  }
+
+  if (querySubTab) {
+    resolvedSubTab = querySubTab;
+  }
+
+  return { tab: resolvedTab, subTab: resolvedSubTab };
+}
+
 export default function App() {
   const [currentUniversity, setCurrentUniversity] = useState<UniversityInfo>(PNG_UNIVERSITIES[0]);
   const [currentUser, setCurrentUser] = useState<AppUser>(MOCK_USERS[0]); // Starts as Administrator
-  const [activeTab, setActiveTab] = useState<ActiveNavTab>('payroll');
+  
+  const initialNav = useMemo(() => getInitialNavigation(), []);
+  const [activeTab, setActiveTab] = useState<ActiveNavTab>(initialNav.tab);
+  const [recruitmentSubTab, setRecruitmentSubTab] = useState<'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding'>(initialNav.subTab || 'openings');
+
+  // Dynamic Browser Tab Title
+  useEffect(() => {
+    const tabTitles: Record<ActiveNavTab, string> = {
+      payroll: 'Statutory Payroll & IRC Tax Engine',
+      recruitment: recruitmentSubTab === 'onboarding' 
+        ? 'Staff Onboarding & Document Verification' 
+        : 'Job Vacancies & Digital Contracting',
+      leave: 'Leave Tracking & Kastom Bereavement',
+      loans: 'Staff Loans & Salary Advances',
+      approvals: 'Approvals & Governance Hub',
+      attendance: 'Campus Attendance & Fortnightly Timesheets',
+      performance: 'Academic Performance Appraisals',
+      faculty: 'Faculty & Staff Roster Directory',
+      reports: 'Statutory Reports & DHERST Audits',
+      integration: 'University Integration Portal',
+    };
+
+    const sectionTitle = tabTitles[activeTab] || 'HRMS';
+    document.title = `${sectionTitle} — PNG UniHR (${currentUniversity.acronym})`;
+  }, [activeTab, recruitmentSubTab, currentUniversity]);
+
+  const handleSelectTab = (tab: ActiveNavTab) => {
+    setActiveTab(tab);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', tab);
+      window.history.replaceState(null, '', url.toString());
+    } catch {
+      window.location.hash = tab;
+    }
+  };
   
   // HR & Staff State
   const [facultyMembers, setFacultyMembers] = useState<FacultyMember[]>(MOCK_FACULTY);
@@ -477,7 +575,7 @@ export default function App() {
         users={MOCK_USERS}
         onSelectUser={handleSelectUser}
         activeTab={activeTab}
-        onSelectTab={(tab) => setActiveTab(tab)}
+        onSelectTab={handleSelectTab}
         onExportReport={handleExportSubvention}
         pendingApprovalsCount={pendingApprovalsCount}
       />
@@ -520,7 +618,7 @@ export default function App() {
             })}
 
             <button
-              onClick={() => setActiveTab('integration')}
+              onClick={() => handleSelectTab('integration')}
               className="ml-2 text-amber-400 hover:text-amber-300 text-[11px] font-semibold flex items-center gap-1 underline underline-offset-2"
             >
               <Sparkles className="w-3 h-3" />
@@ -539,17 +637,17 @@ export default function App() {
           totalFaculty={facultyMembers.length}
           totalLoansCount={loans.length}
           isEmployee={currentUser.role === 'Employee'}
-          onRunPayrollQuick={() => setActiveTab('payroll')}
+          onRunPayrollQuick={() => handleSelectTab('payroll')}
           onApplyLeaveQuick={() => {
-            setActiveTab('leave');
+            handleSelectTab('leave');
             setIsOpenApplyLeaveModal(true);
           }}
           onApplyLoanQuick={() => {
-            setActiveTab('loans');
+            handleSelectTab('loans');
             setIsOpenApplyLoanModal(true);
           }}
-          onVacanciesQuick={() => setActiveTab('recruitment')}
-          onIntegrateQuick={() => setActiveTab('integration')}
+          onVacanciesQuick={() => handleSelectTab('recruitment')}
+          onIntegrateQuick={() => handleSelectTab('integration')}
         />
 
         {/* Tab View Router */}
@@ -601,15 +699,15 @@ export default function App() {
             onUpdateLoanStatus={handleUpdateLoanStatus}
             onUpdateReviewStatus={handleUpdatePerformanceReviewStatus}
             onNavigateToLeave={() => {
-              setActiveTab('leave');
+              handleSelectTab('leave');
               setIsOpenApplyLeaveModal(true);
             }}
             onNavigateToLoans={() => {
-              setActiveTab('loans');
+              handleSelectTab('loans');
               setIsOpenApplyLoanModal(true);
             }}
             contracts={contracts}
-            onNavigateToContracts={() => setActiveTab('recruitment')}
+            onNavigateToContracts={() => handleSelectTab('recruitment')}
           />
         )}
 
@@ -637,6 +735,8 @@ export default function App() {
             onVerifyOnboardingAttachment={handleVerifyOnboardingAttachment}
             onDeleteOnboardingAttachment={handleDeleteOnboardingAttachment}
             onUpdateOffboardingStatus={handleUpdateOffboardingStatus}
+            initialSubTab={recruitmentSubTab}
+            onSubTabChange={(sub) => setRecruitmentSubTab(sub)}
           />
         )}
 
