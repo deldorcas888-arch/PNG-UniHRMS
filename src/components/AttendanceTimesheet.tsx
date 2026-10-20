@@ -205,10 +205,10 @@ export const AttendanceTimesheet: React.FC<AttendanceTimesheetProps> = ({
 
       {/* Control Strip */}
       <div className="bg-white p-4 rounded-lg border border-neutral-200 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Department:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Department:</span>
               <select
                 value={selectedDeptFilter}
                 onChange={(e) => setSelectedDeptFilter(e.target.value)}
@@ -222,7 +222,7 @@ export const AttendanceTimesheet: React.FC<AttendanceTimesheetProps> = ({
             </div>
 
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Status:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Status:</span>
               <select
                 value={selectedStatusFilter}
                 onChange={(e) => setSelectedStatusFilter(e.target.value)}
@@ -237,8 +237,8 @@ export const AttendanceTimesheet: React.FC<AttendanceTimesheetProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="relative w-full sm:w-56">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="relative w-full xl:w-56">
               <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
               <input
                 type="text"
@@ -270,7 +270,7 @@ export const AttendanceTimesheet: React.FC<AttendanceTimesheetProps> = ({
 
       {/* Attendance Roster Table */}
       <div className="bg-white rounded-lg border border-neutral-200 shadow-xs overflow-hidden">
-        <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-4 border-b border-neutral-200 flex flex-wrap gap-3 items-center justify-between">
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 text-amber-600" />
             <h3 className="text-sm font-bold text-neutral-900">
@@ -407,7 +407,7 @@ export const AttendanceTimesheet: React.FC<AttendanceTimesheetProps> = ({
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-neutral-700">Teaching Contact Hours</label>
                   <input

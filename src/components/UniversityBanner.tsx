@@ -43,7 +43,7 @@ export const UniversityBanner: React.FC<UniversityBannerProps> = ({
       {/* Content Container */}
       <div className="relative z-10 p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
-          <div className="max-w-3xl space-y-2">
+          <div className="min-w-0 max-w-3xl space-y-2">
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-amber-400 font-medium">
               <span className="font-bold tracking-wide">{university.acronym}</span>
               <span aria-hidden="true">·</span>
@@ -83,7 +83,7 @@ export const UniversityBanner: React.FC<UniversityBannerProps> = ({
           </div>
 
           {/* Quick Action & Fortnight Strip */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+          <div className="flex flex-col gap-3 w-full lg:w-80 lg:shrink-0">
             <div className="bg-neutral-800/80 backdrop-blur-xs border border-neutral-700/70 rounded-lg p-3 text-xs space-y-1">
               <div className="flex items-center justify-between gap-3 text-neutral-400">
                 <span className="text-[11px] sm:text-xs">Active Fortnight</span>
@@ -99,7 +99,7 @@ export const UniversityBanner: React.FC<UniversityBannerProps> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
+            <div className="grid grid-cols-2 items-center gap-2">
               <button
                 onClick={onRunPayrollQuick}
                 className="px-3 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-400 text-neutral-950 rounded-md transition-colors shadow-xs text-center whitespace-nowrap"
@@ -130,7 +130,7 @@ export const UniversityBanner: React.FC<UniversityBannerProps> = ({
               )}
               <button
                 onClick={onIntegrateQuick}
-                className="col-span-2 sm:col-span-1 px-3 py-2 text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white rounded-md transition-colors text-center whitespace-nowrap flex items-center justify-center gap-1 shadow-xs"
+                className="col-span-2 px-3 py-2 text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white rounded-md transition-colors text-center whitespace-nowrap flex items-center justify-center gap-1 shadow-xs"
                 title="Procure or integrate system for any tertiary institution"
               >
                 <Sparkles className="w-3 h-3 shrink-0" />

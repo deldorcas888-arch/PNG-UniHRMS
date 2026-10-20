@@ -287,7 +287,7 @@ export const ApprovalsHub: React.FC<ApprovalsHubProps> = ({
 
       {/* Main Approval Desk / Track Records Table */}
       <div className="bg-white rounded-lg border border-neutral-200 shadow-xs overflow-hidden">
-        <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-4 border-b border-neutral-200 flex flex-wrap gap-3 items-center justify-between">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-amber-500" />
             <h3 className="text-sm font-bold text-neutral-900">

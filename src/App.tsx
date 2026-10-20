@@ -115,7 +115,7 @@ function getInitialNavigation(): { tab: ActiveNavTab; subTab?: 'openings' | 'app
 }
 
 export default function App() {
-  const [currentUniversity, setCurrentUniversity] = useState<UniversityInfo>(PNG_UNIVERSITIES[0]);
+  const currentUniversity: UniversityInfo = PNG_UNIVERSITIES[0];
   const [currentUser, setCurrentUser] = useState<AppUser>(MOCK_USERS[0]); // Starts as Administrator
   
   const initialNav = useMemo(() => getInitialNavigation(), []);
@@ -627,7 +627,7 @@ export default function App() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <main className="flex-1 min-w-0 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Campus & Institution Banner with HR Quick Actions */}
         <UniversityBanner
           university={currentUniversity}
@@ -785,8 +785,6 @@ export default function App() {
 
         {activeTab === 'integration' && (
           <UniversityIntegrationPortal
-            currentUniversity={currentUniversity}
-            universities={PNG_UNIVERSITIES}
             inquiries={inquiries}
             onAddInquiry={handleAddInquiry}
           />

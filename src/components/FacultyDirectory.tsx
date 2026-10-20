@@ -154,7 +154,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">School:</span>
+              <span className="text-neutral-500 font-medium shrink-0">School:</span>
               <select
                 value={selectedSchool}
                 onChange={(e) => setSelectedSchool(e.target.value)}
@@ -170,7 +170,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
             </div>
 
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Academic Rank:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Academic Rank:</span>
               <select
                 value={selectedRank}
                 onChange={(e) => setSelectedRank(e.target.value)}
@@ -351,7 +351,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
               </div>
 
               <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <span className="text-neutral-500 block">Staff ID:</span>
                     <strong className="font-mono text-neutral-900">{selectedFacultyDetails.staffId}</strong>
@@ -430,7 +430,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
             </div>
 
             <form onSubmit={handleCreateFaculty} className="space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">First Name</label>
                   <input
@@ -455,7 +455,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Academic Rank</label>
                   <select
@@ -487,7 +487,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Department</label>
                   <input
@@ -511,7 +511,7 @@ export const FacultyDirectory: React.FC<FacultyDirectoryProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Superannuation Fund</label>
                   <select

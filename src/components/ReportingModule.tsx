@@ -1010,7 +1010,7 @@ export const ReportingModule: React.FC<ReportingModuleProps> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-neutral-200 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-neutral-200 text-xs">
                   <div>
                     <span className="text-neutral-500 block">Department Filter:</span>
                     <span className="font-medium text-neutral-900">{selectedDepartment === 'all' ? 'All University Departments' : selectedDepartment}</span>

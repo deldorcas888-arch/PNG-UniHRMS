@@ -309,7 +309,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
           <div className="flex flex-wrap items-center gap-3">
             {/* School filter */}
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">School:</span>
+              <span className="text-neutral-500 font-medium shrink-0">School:</span>
               <select
                 value={selectedSchool}
                 onChange={(e) => setSelectedSchool(e.target.value)}
@@ -326,7 +326,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
 
             {/* Sponsorship filter */}
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Sponsorship:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Sponsorship:</span>
               <select
                 value={selectedSponsorship}
                 onChange={(e) => setSelectedSponsorship(e.target.value)}
@@ -344,7 +344,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
 
             {/* Status filter */}
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Status:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Status:</span>
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
@@ -574,7 +574,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                 </p>
 
                 <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-200 space-y-2 text-xs">
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <span className="text-neutral-500 block">Full Name:</span>
                       <strong className="text-neutral-900 text-sm">
@@ -589,7 +589,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 pt-2 border-t border-neutral-200">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-neutral-200">
                     <div>
                       <span className="text-neutral-500 block">Program of Study:</span>
                       <strong className="text-neutral-900">
@@ -619,7 +619,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 pt-2 border-t border-neutral-200">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-neutral-200">
                     <div>
                       <span className="text-neutral-500 block">Funding / Sponsorship:</span>
                       <span className="text-neutral-900 font-medium">{selectedStudentForLetter.sponsorship}</span>
@@ -708,7 +708,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
             </div>
 
             <form onSubmit={handleCreateStudent} className="space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">First Name</label>
                   <input
@@ -733,7 +733,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Gender</label>
                   <select
@@ -761,7 +761,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Academic School</label>
                   <select
@@ -803,7 +803,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Sponsorship Category</label>
                   <select
@@ -831,7 +831,7 @@ export const StudentEnrollment: React.FC<StudentEnrollmentProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Semester Tuition Due (PGK)</label>
                   <input

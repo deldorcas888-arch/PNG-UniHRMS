@@ -1333,7 +1333,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="font-semibold text-neutral-700">Full Name *</label>
                     <input
@@ -1358,7 +1358,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="font-semibold text-neutral-700">Contact Phone (+675)</label>
                     <input
@@ -1790,7 +1790,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                 <div>Council Minutes Ref: {university.acronym}/COUNCIL/APPT/2026/SEC</div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="font-semibold text-neutral-700">Salary Grade</label>
                   <select
@@ -1817,7 +1817,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <div className="space-y-1">
                   <label className="font-semibold text-neutral-700">DMA Allowance / FN</label>
                   <input
@@ -1849,7 +1849,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="font-semibold text-neutral-700">Superannuation Fund</label>
                   <select
@@ -2199,7 +2199,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="font-semibold text-neutral-700">Department</label>
                   <input
@@ -2226,7 +2226,7 @@ export const RecruitmentOnboarding: React.FC<RecruitmentOnboardingProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="font-semibold text-neutral-700">Vacancies Count</label>
                   <input

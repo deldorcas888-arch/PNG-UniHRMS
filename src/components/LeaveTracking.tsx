@@ -208,7 +208,7 @@ export const LeaveTracking: React.FC<LeaveTrackingProps> = ({
       {/* Sub Tabs and Header Strip */}
       <div className="bg-white p-4 rounded-lg border border-neutral-200 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-2 p-1 bg-neutral-100 rounded-lg">
+          <div className="flex flex-wrap items-center gap-2 p-1 bg-neutral-100 rounded-lg">
             <button
               onClick={() => setActiveSubTab('requests')}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
@@ -257,7 +257,7 @@ export const LeaveTracking: React.FC<LeaveTrackingProps> = ({
           <div className="pt-3 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-neutral-500 font-medium">Leave Type:</span>
+                <span className="text-neutral-500 font-medium shrink-0">Leave Type:</span>
                 <select
                   value={selectedTypeFilter}
                   onChange={(e) => setSelectedTypeFilter(e.target.value)}
@@ -274,7 +274,7 @@ export const LeaveTracking: React.FC<LeaveTrackingProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-neutral-500 font-medium">Status:</span>
+                <span className="text-neutral-500 font-medium shrink-0">Status:</span>
                 <select
                   value={selectedStatusFilter}
                   onChange={(e) => setSelectedStatusFilter(e.target.value)}
@@ -580,7 +580,7 @@ export const LeaveTracking: React.FC<LeaveTrackingProps> = ({
                   <div className="text-neutral-600">{selectedRecordDetails.academicRank} · {selectedRecordDetails.department}</div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-neutral-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-neutral-100">
                   <div>
                     <span className="text-neutral-500 block">Leave Type:</span>
                     <strong className="text-neutral-900">{selectedRecordDetails.leaveType}</strong>
@@ -591,7 +591,7 @@ export const LeaveTracking: React.FC<LeaveTrackingProps> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-neutral-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-neutral-100">
                   <div>
                     <span className="text-neutral-500 block">Start Date:</span>
                     <span className="font-mono text-neutral-900">{selectedRecordDetails.startDate}</span>

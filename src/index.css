@@ -1,11 +1,47 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-wrap: anywhere;
+  }
+  :where(.flex, .grid) > * {
+    min-width: 0;
+  }
+  input, select, textarea {
+    max-width: 100%;
+  }
+  svg {
+    flex-shrink: 0;
+  }
+  :focus-visible {
+    outline: 2px solid #b45309;
+    outline-offset: 3px;
   }
   .font-mono, [class*="font-mono"] {
     font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Keep touch controls readable and prevent focus zoom on mobile browsers. */
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+    font-size: 16px;
+    min-height: 44px;
+  }
+  button {
+    min-height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

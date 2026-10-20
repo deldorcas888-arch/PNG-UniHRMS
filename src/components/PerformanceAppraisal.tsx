@@ -198,7 +198,7 @@ export const PerformanceAppraisal: React.FC<PerformanceAppraisalProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Performance Band:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Performance Band:</span>
               <select
                 value={selectedBandFilter}
                 onChange={(e) => setSelectedBandFilter(e.target.value)}
@@ -238,7 +238,7 @@ export const PerformanceAppraisal: React.FC<PerformanceAppraisalProps> = ({
 
       {/* Appraisals Roster */}
       <div className="bg-white rounded-lg border border-neutral-200 shadow-xs overflow-hidden">
-        <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-4 border-b border-neutral-200 flex flex-wrap gap-3 items-center justify-between">
           <div className="flex items-center gap-2">
             <Award className="w-4 h-4 text-purple-600" />
             <h3 className="text-sm font-bold text-neutral-900">
@@ -462,7 +462,7 @@ export const PerformanceAppraisal: React.FC<PerformanceAppraisalProps> = ({
                 )}
               </div>
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-neutral-700">Teaching %</label>
                   <input
