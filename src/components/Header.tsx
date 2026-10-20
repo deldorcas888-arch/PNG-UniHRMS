@@ -16,6 +16,7 @@ import {
   Award,
   Users,
   FileBarChart,
+  LogOut,
   ChevronRight
 } from 'lucide-react';
 
@@ -28,14 +29,12 @@ export type ActiveNavTab =
   | 'attendance' 
   | 'performance' 
   | 'faculty' 
-  | 'reports' 
-  | 'integration';
+  | 'reports';
 
 interface HeaderProps {
   currentUniversity: UniversityInfo;
   currentUser: AppUser;
-  users: AppUser[];
-  onSelectUser: (user: AppUser) => void;
+  onLogout: () => void;
   activeTab: ActiveNavTab;
   onSelectTab: (tab: ActiveNavTab) => void;
   onExportReport: () => void;
@@ -45,8 +44,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   currentUniversity,
   currentUser,
-  users,
-  onSelectUser,
+  onLogout,
   activeTab,
   onSelectTab,
   onExportReport,
@@ -136,14 +134,7 @@ export const Header: React.FC<HeaderProps> = ({
       badge: null,
       show: !isEmployee,
     },
-    {
-      id: 'integration' as ActiveNavTab,
-      label: 'Integrate System',
-      mobileLabel: 'Integrate',
-      icon: Sparkles,
-      badge: 'Procure',
-      show: true,
-    },
+
   ];
 
   return (
@@ -164,10 +155,10 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="flex min-w-0 flex-col">
               <div className="flex items-center gap-1.5">
                 <span className="text-base sm:text-lg font-extrabold tracking-tight text-neutral-900 whitespace-nowrap">
-                  PNG UniHR
+                  UNRE HR
                 </span>
                 <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200 uppercase tracking-wider">
-                  Enterprise
+                  Staff Portal
                 </span>
               </div>
               <span className="text-[10px] sm:text-[11px] text-neutral-500 whitespace-nowrap truncate max-w-[130px] xs:max-w-[180px] sm:max-w-[260px] lg:max-w-[320px]">
@@ -178,45 +169,13 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Zone 3: CTA, RBAC Switcher & Mobile Toggle */}
           <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-            {/* CTA Button: Procure / Integrate for Any University */}
-            <button
-              onClick={() => handleTabClick('integration')}
-              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 text-xs font-bold rounded-md transition-all shadow-xs ${
-                activeTab === 'integration'
-                  ? 'bg-amber-500 text-neutral-950 ring-2 ring-amber-400'
-                  : 'bg-amber-400 hover:bg-amber-300 text-neutral-950 hover:shadow-sm'
-              }`}
-              title="Procure or Integrate PNG UniHR for your University or College"
-            >
-              <Sparkles className="w-3.5 h-3.5 fill-current shrink-0" />
-              <span className="hidden md:inline">Buy / Integrate System</span>
-              <span className="md:hidden">Integrate</span>
-            </button>
-
-            {/* RBAC Role & User Switcher */}
-            <div className="relative inline-flex items-center min-w-0 flex-1 sm:flex-none">
-              <select
-                value={currentUser.id}
-                onChange={(e) => {
-                  const found = users.find(u => u.id === e.target.value);
-                  if (found) {
-                    onSelectUser(found);
-                    if (found.role === 'Employee' && activeTab === 'reports') {
-                      onSelectTab('leave');
-                    }
-                  }
-                }}
-                className="text-[11px] sm:text-xs bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 font-semibold py-1.5 pl-2 sm:pl-2.5 pr-5 sm:pr-6 rounded-md border border-neutral-300 cursor-pointer focus:outline-hidden focus:ring-1 focus:ring-neutral-400 w-full sm:w-auto max-w-full sm:max-w-[180px] truncate"
-                aria-label="User persona"
-                title="Switch User Persona Simulation"
-              >
-                {users.map(u => (
-                  <option key={u.id} value={u.id}>
-                    [{u.role}] {u.name}
-                  </option>
-                ))}
-              </select>
+            <div className="min-w-0 flex-1 sm:flex-none text-xs">
+              <p className="font-semibold break-words">{currentUser.name}</p>
+              <p className="text-neutral-500">{currentUser.role}</p>
             </div>
+            <button onClick={onLogout} className="inline-flex items-center gap-2 rounded-md border border-neutral-300 px-3 py-2 text-xs font-semibold hover:bg-neutral-100">
+              <LogOut className="h-4 w-4" /> Log out
+            </button>
 
             {/* Mobile Hamburger Toggle Button */}
             <button
@@ -279,25 +238,7 @@ export const Header: React.FC<HeaderProps> = ({
               })}
             </div>
 
-            {/* University Deployment Banner inside Mobile Drawer */}
-            <div className="pt-2 border-t border-neutral-100">
-              <div className="p-3 bg-amber-50/80 border border-amber-200/80 rounded-lg flex items-center justify-between gap-3">
-                <div className="space-y-0.5">
-                  <div className="text-xs font-bold text-neutral-900">
-                    Deploy for Another University
-                  </div>
-                  <div className="text-[11px] text-neutral-600">
-                    UPNG, UNITECH, UOG, DWU, UNRE, WPU or private colleges.
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleTabClick('integration')}
-                  className="px-3 py-1.5 bg-neutral-900 text-white hover:bg-neutral-800 rounded-md text-xs font-bold shrink-0"
-                >
-                  Inquire
-                </button>
-              </div>
-            </div>
+
           </div>
         </div>
       )}

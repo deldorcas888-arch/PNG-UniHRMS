@@ -1,4 +1,5 @@
 import React from 'react';
+import campusImage from '../assets/images/png_university_campus_banner_1791954629616.jpg';
 import { UniversityInfo } from '../types';
 import { MapPin, Calendar, Award, UserCheck, ShieldCheck, CreditCard, Sparkles, Briefcase } from 'lucide-react';
 
@@ -12,7 +13,6 @@ interface UniversityBannerProps {
   onApplyLeaveQuick: () => void;
   onApplyLoanQuick: () => void;
   onVacanciesQuick?: () => void;
-  onIntegrateQuick: () => void;
 }
 
 export const UniversityBanner: React.FC<UniversityBannerProps> = ({
@@ -25,15 +25,14 @@ export const UniversityBanner: React.FC<UniversityBannerProps> = ({
   onApplyLeaveQuick,
   onApplyLoanQuick,
   onVacanciesQuick,
-  onIntegrateQuick,
 }) => {
   return (
     <div className="relative overflow-hidden rounded-xl border border-neutral-200 bg-neutral-900 text-white shadow-xs mb-6">
       {/* Background Image with Scrim */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/png_university_campus_banner_1791954629616.jpg"
-          alt={`${university.name} campus scenery`}
+          src={campusImage}
+          alt={`${university.name} staff portal banner`}
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover object-center opacity-30"
         />
@@ -128,14 +127,7 @@ export const UniversityBanner: React.FC<UniversityBannerProps> = ({
                   <span>Vacancies</span>
                 </button>
               )}
-              <button
-                onClick={onIntegrateQuick}
-                className="col-span-2 px-3 py-2 text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white rounded-md transition-colors text-center whitespace-nowrap flex items-center justify-center gap-1 shadow-xs"
-                title="Procure or integrate system for any tertiary institution"
-              >
-                <Sparkles className="w-3 h-3 shrink-0" />
-                <span>Buy / Integrate</span>
-              </button>
+
             </div>
           </div>
         </div>

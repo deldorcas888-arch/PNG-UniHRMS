@@ -17,7 +17,6 @@ import {
   StaffLoan,
   StudentRecord, 
   UniversityInfo, 
-  UniversityInquiry
 } from './types';
 import { 
   PNG_UNIVERSITIES, 
@@ -26,7 +25,6 @@ import {
   MOCK_LEAVE_RECORDS, 
   MOCK_LEAVE_BALANCES, 
   MOCK_SCHOOLS,
-  MOCK_USERS,
   MOCK_LOANS,
   MOCK_JOB_OPENINGS,
   MOCK_APPLICANTS,
@@ -34,8 +32,7 @@ import {
   MOCK_ONBOARDING_TASKS,
   MOCK_OFFBOARDING_CASES,
   MOCK_PERFORMANCE_REVIEWS,
-  MOCK_ATTENDANCE_RECORDS,
-  MOCK_INQUIRIES
+  MOCK_ATTENDANCE_RECORDS
 } from './data/mockData';
 import { Header, ActiveNavTab } from './components/Header';
 import { UniversityBanner } from './components/UniversityBanner';
@@ -48,7 +45,6 @@ import { AttendanceTimesheet } from './components/AttendanceTimesheet';
 import { PerformanceAppraisal } from './components/PerformanceAppraisal';
 import { FacultyDirectory } from './components/FacultyDirectory';
 import { ReportingModule } from './components/ReportingModule';
-import { UniversityIntegrationPortal } from './components/UniversityIntegrationPortal';
 import { ShieldCheck, Mail, Sparkles, Building2 } from 'lucide-react';
 
 function getInitialNavigation(): { tab: ActiveNavTab; subTab?: 'openings' | 'applicants' | 'contracts' | 'onboarding' | 'offboarding' } {
@@ -77,7 +73,7 @@ function getInitialNavigation(): { tab: ActiveNavTab; subTab?: 'openings' | 'app
   const candidate = queryTab || hash || (pathname.includes('.html') ? pathname : undefined);
 
   if (bodyTab) {
-    resolvedTab = bodyTab;
+    resolvedTab = bodyTab === ('integration' as string) ? 'payroll' : bodyTab;
     resolvedSubTab = bodySubTab;
   } else if (candidate) {
     if (candidate.includes('onboard')) {
@@ -103,7 +99,7 @@ function getInitialNavigation(): { tab: ActiveNavTab; subTab?: 'openings' | 'app
     } else if (candidate.includes('report') || candidate.includes('audit')) {
       resolvedTab = 'reports';
     } else if (candidate.includes('integ') || candidate.includes('portal')) {
-      resolvedTab = 'integration';
+      resolvedTab = 'payroll';
     }
   }
 
@@ -114,9 +110,8 @@ function getInitialNavigation(): { tab: ActiveNavTab; subTab?: 'openings' | 'app
   return { tab: resolvedTab, subTab: resolvedSubTab };
 }
 
-export default function App() {
-  const currentUniversity: UniversityInfo = PNG_UNIVERSITIES[0];
-  const [currentUser, setCurrentUser] = useState<AppUser>(MOCK_USERS[0]); // Starts as Administrator
+export default function App({ currentUser, onLogout }: { currentUser: AppUser; onLogout: () => void }) {
+  const currentUniversity: UniversityInfo = PNG_UNIVERSITIES.find(university => university.id === 'unre')!;
   
   const initialNav = useMemo(() => getInitialNavigation(), []);
   const [activeTab, setActiveTab] = useState<ActiveNavTab>(initialNav.tab);
@@ -136,11 +131,10 @@ export default function App() {
       performance: 'Academic Performance Appraisals',
       faculty: 'Faculty & Staff Roster Directory',
       reports: 'Statutory Reports & DHERST Audits',
-      integration: 'University Integration Portal',
     };
 
     const sectionTitle = tabTitles[activeTab] || 'HRMS';
-    document.title = `${sectionTitle} — PNG UniHR (${currentUniversity.acronym})`;
+    document.title = `${sectionTitle} — UNRE HR (${currentUniversity.acronym})`;
   }, [activeTab, recruitmentSubTab, currentUniversity]);
 
   const handleSelectTab = (tab: ActiveNavTab) => {
@@ -166,7 +160,6 @@ export default function App() {
   const [offboardingCases, setOffboardingCases] = useState<OffboardingCase[]>(MOCK_OFFBOARDING_CASES);
   const [performanceReviews, setPerformanceReviews] = useState<PerformanceReview[]>(MOCK_PERFORMANCE_REVIEWS);
   const [attendanceRecords, setAttendanceRecords] = useState<AttendanceRecord[]>(MOCK_ATTENDANCE_RECORDS);
-  const [inquiries, setInquiries] = useState<UniversityInquiry[]>(MOCK_INQUIRIES);
   
   const activeFortnight = 'FN 21 - 2026 (05 Oct - 18 Oct 2026)';
 
@@ -174,16 +167,6 @@ export default function App() {
   const [isOpenApplyLeaveModal, setIsOpenApplyLeaveModal] = useState(false);
   const [isOpenApplyLoanModal, setIsOpenApplyLoanModal] = useState(false);
   const [isOpenAddFacultyModal, setIsOpenAddFacultyModal] = useState(false);
-
-  // Role switch handler
-  const handleSelectUser = (user: AppUser) => {
-    setCurrentUser(user);
-    if (user.role === 'Employee') {
-      if (activeTab === 'reports') {
-        setActiveTab('leave');
-      }
-    }
-  };
 
   // Pending items count for HR / Admin badge
   const pendingApprovalsCount = useMemo(() => {
@@ -364,7 +347,7 @@ export default function App() {
       employmentType: contract.employmentType,
       salaryGrade: contract.salaryGrade,
       annualBaseSalary: contract.annualBaseSalary,
-      campusHousingUnit: 'Waigani Campus Residential Quarters Block C',
+      campusHousingUnit: 'Vudal Campus Residential Quarters Block C',
       dateJoined: contract.startDate,
       qualifications: 'Postgraduate Tertiary Qualifications',
       coursesTaught: ['Introductory Semester Unit 1', 'Advanced Research Seminar'],
@@ -538,11 +521,6 @@ export default function App() {
     setPerformanceReviews(prev => prev.map(r => r.id === reviewId ? { ...r, status } : r));
   };
 
-  // Handlers: Integration Inquiry
-  const handleAddInquiry = (inquiry: UniversityInquiry) => {
-    setInquiries(prev => [inquiry, ...prev]);
-  };
-
   const handleExportSubvention = () => {
     const headers = ['Category', 'Institution', 'Metric', 'Value (PGK / Count)', 'Details'];
     const rows = [
@@ -570,8 +548,7 @@ export default function App() {
       <Header
         currentUniversity={currentUniversity}
         currentUser={currentUser}
-        users={MOCK_USERS}
-        onSelectUser={handleSelectUser}
+        onLogout={onLogout}
         activeTab={activeTab}
         onSelectTab={handleSelectTab}
         onExportReport={handleExportSubvention}
@@ -594,35 +571,7 @@ export default function App() {
             </span>
           </div>
 
-          {/* Quick RBAC Role Simulator Buttons & Contact Hint */}
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 shrink-0">
-            <span className="text-[11px] text-neutral-500 mr-0.5 hidden lg:inline">Simulate Role:</span>
-            {MOCK_USERS.map((user) => {
-              const isActive = currentUser.id === user.id;
-              return (
-                <button
-                  key={user.id}
-                  onClick={() => handleSelectUser(user)}
-                  className={`px-2 py-1 text-[11px] font-medium rounded transition-colors whitespace-nowrap ${
-                    isActive
-                      ? 'bg-amber-400 text-neutral-950 font-bold'
-                      : 'bg-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-700'
-                  }`}
-                  title={`Switch to ${user.name} (${user.role})`}
-                >
-                  {user.role}
-                </button>
-              );
-            })}
 
-            <button
-              onClick={() => handleSelectTab('integration')}
-              className="ml-1 sm:ml-2 text-amber-400 hover:text-amber-300 text-[11px] font-semibold flex items-center gap-1 underline underline-offset-2 whitespace-nowrap"
-            >
-              <Sparkles className="w-3 h-3 shrink-0" />
-              <span>Contact to Integrate</span>
-            </button>
-          </div>
         </div>
       </div>
 
@@ -645,7 +594,6 @@ export default function App() {
             setIsOpenApplyLoanModal(true);
           }}
           onVacanciesQuick={() => handleSelectTab('recruitment')}
-          onIntegrateQuick={() => handleSelectTab('integration')}
         />
 
         {/* Tab View Router */}
@@ -783,12 +731,7 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'integration' && (
-          <UniversityIntegrationPortal
-            inquiries={inquiries}
-            onAddInquiry={handleAddInquiry}
-          />
-        )}
+
       </main>
 
       {/* Institutional Footer */}
@@ -806,13 +749,7 @@ export default function App() {
             <span>IRC SWT 26 Fortnights</span>
             <span aria-hidden="true">·</span>
             <span>Nambawan Super & Nasfund</span>
-            <span aria-hidden="true">·</span>
-            <a 
-              href="mailto:ddel@emtv.com.pg?subject=PNG%20University%20HRMS%20Implementation" 
-              className="text-amber-600 hover:underline font-semibold"
-            >
-              Contact Integration: ddel@emtv.com.pg
-            </a>
+
           </div>
         </div>
       </footer>

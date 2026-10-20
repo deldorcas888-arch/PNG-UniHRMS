@@ -26,7 +26,6 @@ export default defineConfig(() => {
           performance: path.resolve(__dirname, 'performance.html'),
           faculty: path.resolve(__dirname, 'faculty.html'),
           reports: path.resolve(__dirname, 'reports.html'),
-          integration: path.resolve(__dirname, 'integration.html'),
           notFound: path.resolve(__dirname, '404.html'),
         },
       },
