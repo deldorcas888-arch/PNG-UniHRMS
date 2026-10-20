@@ -33,8 +33,6 @@ export type ActiveNavTab =
 
 interface HeaderProps {
   currentUniversity: UniversityInfo;
-  universities?: UniversityInfo[];
-  onSelectUniversity?: (uni: UniversityInfo) => void;
   currentUser: AppUser;
   users: AppUser[];
   onSelectUser: (user: AppUser) => void;
@@ -151,11 +149,11 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-2 sm:gap-4 h-16">
+        <div className="flex items-center justify-between flex-wrap gap-3 min-h-16 py-3">
           {/* Zone 1: Wordmark & Enterprise Brand */}
           <div 
             onClick={() => handleTabClick('payroll')}
-            className="flex items-center gap-2.5 sm:gap-3 shrink-0 cursor-pointer group"
+            className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 cursor-pointer group"
           >
             <div 
               className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center font-bold text-white text-sm sm:text-base shadow-xs shrink-0 transition-transform group-hover:scale-105"
@@ -163,7 +161,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               {currentUniversity.acronym.substring(0, 2)}
             </div>
-            <div className="flex flex-col">
+            <div className="flex min-w-0 flex-col">
               <div className="flex items-center gap-1.5">
                 <span className="text-base sm:text-lg font-extrabold tracking-tight text-neutral-900 whitespace-nowrap">
                   PNG UniHR
@@ -172,39 +170,14 @@ export const Header: React.FC<HeaderProps> = ({
                   Enterprise
                 </span>
               </div>
-              <span className="text-[10px] sm:text-[11px] text-neutral-500 whitespace-nowrap truncate max-w-[130px] xs:max-w-[180px] sm:max-w-[260px] md:max-w-none">
+              <span className="text-[10px] sm:text-[11px] text-neutral-500 whitespace-nowrap truncate max-w-[130px] xs:max-w-[180px] sm:max-w-[260px] lg:max-w-[320px]">
                 {currentUniversity.name}
               </span>
             </div>
           </div>
 
-          {/* Zone 2: Navigation Links (Desktop 2xl / xl) */}
-          <nav className="hidden xl:flex items-center gap-3 lg:gap-4 text-xs font-semibold">
-            {navItems.filter(item => item.show && item.id !== 'integration').map(item => {
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleTabClick(item.id)}
-                  className={`py-1.5 transition-colors whitespace-nowrap shrink-0 border-b-2 flex items-center gap-1.5 ${
-                    isActive
-                      ? 'border-neutral-900 text-neutral-900 font-bold'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-900'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="px-1.5 py-0.2 rounded-full bg-amber-400 text-neutral-950 text-[10px] font-bold">
-                      {item.badge}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-
           {/* Zone 3: CTA, RBAC Switcher & Mobile Toggle */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             {/* CTA Button: Procure / Integrate for Any University */}
             <button
               onClick={() => handleTabClick('integration')}
@@ -221,7 +194,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {/* RBAC Role & User Switcher */}
-            <div className="relative inline-flex items-center">
+            <div className="relative inline-flex items-center min-w-0 flex-1 sm:flex-none">
               <select
                 value={currentUser.id}
                 onChange={(e) => {
@@ -233,7 +206,8 @@ export const Header: React.FC<HeaderProps> = ({
                     }
                   }
                 }}
-                className="text-[11px] sm:text-xs bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 font-semibold py-1.5 pl-2 sm:pl-2.5 pr-5 sm:pr-6 rounded-md border border-neutral-300 cursor-pointer focus:outline-hidden focus:ring-1 focus:ring-neutral-400 max-w-[110px] sm:max-w-[180px] truncate"
+                className="text-[11px] sm:text-xs bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 font-semibold py-1.5 pl-2 sm:pl-2.5 pr-5 sm:pr-6 rounded-md border border-neutral-300 cursor-pointer focus:outline-hidden focus:ring-1 focus:ring-neutral-400 w-full sm:w-auto max-w-full sm:max-w-[180px] truncate"
+                aria-label="User persona"
                 title="Switch User Persona Simulation"
               >
                 {users.map(u => (
@@ -247,7 +221,9 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Mobile Hamburger Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden p-2 rounded-md text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 transition-colors focus:outline-hidden focus:ring-1 focus:ring-neutral-400 shrink-0"
+              className="ml-auto p-2 rounded-md text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 transition-colors focus:outline-hidden focus:ring-1 focus:ring-neutral-400 shrink-0"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="module-navigation"
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             >
               {isMobileMenuOpen ? (
@@ -262,9 +238,9 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer Menu (Expandable) */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden border-t border-neutral-200 bg-white/98 backdrop-blur-md shadow-xl animate-in fade-in slide-in-from-top-1 duration-150">
+        <div id="module-navigation" className="max-h-[60dvh] overflow-y-auto border-t border-neutral-200 bg-white/98 backdrop-blur-md shadow-xl animate-in fade-in slide-in-from-top-1 duration-150">
           <div className="max-w-7xl mx-auto px-4 py-4 space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-neutral-100">
+            <div className="flex flex-wrap gap-2 items-center justify-between pb-2 border-b border-neutral-100">
               <div className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
                 System Modules & Workflows
               </div>
@@ -327,8 +303,8 @@ export const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* Sub-header horizontal swipeable tab strip for mobile and tablets */}
-      <div className="xl:hidden border-t border-neutral-200/80 bg-neutral-50/90 py-1.5 px-3">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
+      <div className="border-t border-neutral-200/80 bg-neutral-50/90 py-1.5 px-3">
+        <div className="flex items-center gap-1.5 overflow-x-auto scroll-smooth py-0.5 max-w-7xl mx-auto">
           {navItems.filter(item => item.show).map(item => {
             const isActive = activeTab === item.id;
             return (

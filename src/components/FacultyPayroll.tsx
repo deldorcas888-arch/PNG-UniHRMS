@@ -274,7 +274,7 @@ export const FacultyPayroll: React.FC<FacultyPayrollProps> = ({
           <div className="flex flex-wrap items-center gap-3">
             {/* Pay Period Selector */}
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Pay Cycle:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Pay Cycle:</span>
               <select
                 value={selectedFortnight}
                 onChange={(e) => setSelectedFortnight(e.target.value)}
@@ -289,7 +289,7 @@ export const FacultyPayroll: React.FC<FacultyPayrollProps> = ({
 
             {/* School Filter */}
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">School:</span>
+              <span className="text-neutral-500 font-medium shrink-0">School:</span>
               <select
                 value={selectedSchool}
                 onChange={(e) => setSelectedSchool(e.target.value)}
@@ -496,7 +496,7 @@ export const FacultyPayroll: React.FC<FacultyPayrollProps> = ({
       {/* Official Printable Payslip Modal */}
       {selectedPayslip && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-neutral-200 my-8">
+          <div className="bg-white rounded-xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-neutral-200 my-4 max-h-[90dvh] overflow-y-auto">
             <button
               onClick={() => setSelectedPayslip(null)}
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-md"
@@ -526,7 +526,7 @@ export const FacultyPayroll: React.FC<FacultyPayrollProps> = ({
               </div>
 
               {/* Employee & Bank Details Grid */}
-              <div className="grid grid-cols-2 gap-4 text-xs bg-neutral-50 p-3.5 rounded-lg border border-neutral-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs bg-neutral-50 p-3.5 rounded-lg border border-neutral-200">
                 <div>
                   <div className="text-neutral-500">Employee Name:</div>
                   <div className="font-semibold text-neutral-900 text-sm">{selectedPayslip.staffName}</div>

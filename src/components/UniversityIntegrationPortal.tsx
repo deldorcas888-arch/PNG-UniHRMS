@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UniversityInfo, UniversityInquiry } from '../types';
+import { UniversityInquiry } from '../types';
 import { 
   Building2, 
   Mail, 
@@ -22,19 +22,15 @@ import {
 } from 'lucide-react';
 
 interface UniversityIntegrationPortalProps {
-  currentUniversity: UniversityInfo;
-  universities: UniversityInfo[];
   inquiries: UniversityInquiry[];
   onAddInquiry: (inquiry: UniversityInquiry) => void;
 }
 
 export const UniversityIntegrationPortal: React.FC<UniversityIntegrationPortalProps> = ({
-  currentUniversity,
-  universities,
   inquiries,
   onAddInquiry,
 }) => {
-  const [formUniName, setFormUniName] = useState(currentUniversity.name);
+  const [formUniName, setFormUniName] = useState('');
   const [formRepName, setFormRepName] = useState('');
   const [formTitle, setFormTitle] = useState('Registrar / HR Director');
   const [formEmail, setFormEmail] = useState('');
@@ -63,11 +59,11 @@ export const UniversityIntegrationPortal: React.FC<UniversityIntegrationPortalPr
 
   const handleSubmitInquiry = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formRepName || !formEmail) return;
+    if (!formUniName.trim() || !formRepName.trim() || !formEmail.trim()) return;
 
     const newInq: UniversityInquiry = {
       id: `INQ-${Math.floor(100 + Math.random() * 900)}`,
-      universityName: formUniName,
+      universityName: formUniName.trim(),
       representativeName: `${formRepName} (${formTitle})`,
       officialEmail: formEmail,
       phone: formPhone,
@@ -109,7 +105,7 @@ export const UniversityIntegrationPortal: React.FC<UniversityIntegrationPortalPr
 
           {/* Contact Direct Strip */}
           <div className="pt-2 flex flex-wrap items-center gap-4 text-xs">
-            <div className="flex items-center gap-2 bg-neutral-800/80 px-3.5 py-2 rounded-lg border border-neutral-700">
+            <div className="flex flex-wrap items-center gap-2 bg-neutral-800/80 px-3.5 py-2 rounded-lg border border-neutral-700">
               <Mail className="w-4 h-4 text-amber-400" />
               <span>Direct Implementation Contact:</span>
               <a 
@@ -120,7 +116,7 @@ export const UniversityIntegrationPortal: React.FC<UniversityIntegrationPortalPr
               </a>
             </div>
 
-            <div className="flex items-center gap-2 bg-neutral-800/80 px-3.5 py-2 rounded-lg border border-neutral-700">
+            <div className="flex flex-wrap items-center gap-2 bg-neutral-800/80 px-3.5 py-2 rounded-lg border border-neutral-700">
               <Building2 className="w-4 h-4 text-emerald-400" />
               <span>Base: Port Moresby, Papua New Guinea</span>
             </div>
@@ -131,7 +127,7 @@ export const UniversityIntegrationPortal: React.FC<UniversityIntegrationPortalPr
       {/* Grid: Request Form + Technical Specs */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Form (7 Cols) */}
-        <div className="lg:col-span-7 bg-white rounded-xl border border-neutral-200 shadow-xs p-6 sm:p-8 space-y-6">
+        <div className="lg:col-span-7 bg-white rounded-xl border border-neutral-200 shadow-xs p-4 sm:p-8 space-y-6">
           <div className="border-b border-neutral-100 pb-4">
             <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">
               <Send className="w-5 h-5 text-amber-600" />
@@ -143,24 +139,19 @@ export const UniversityIntegrationPortal: React.FC<UniversityIntegrationPortalPr
           </div>
 
           <form onSubmit={handleSubmitInquiry} className="space-y-4 text-xs">
-            {/* University Selection */}
             <div className="space-y-1">
-              <label className="font-semibold text-neutral-700">Select Tertiary Institution</label>
-              <select
+              <label htmlFor="institution-name" className="font-semibold text-neutral-700">Institution Name *</label>
+              <input
+                id="institution-name"
+                name="institutionName"
+                type="text"
+                required
+                autoComplete="organization"
+                placeholder="Enter your university or college name"
                 value={formUniName}
                 onChange={(e) => setFormUniName(e.target.value)}
                 className="w-full p-2.5 bg-neutral-50 border border-neutral-200 rounded-md text-neutral-800 font-medium focus:outline-hidden focus:ring-1 focus:ring-neutral-400"
-              >
-                {universities.map(u => (
-                  <option key={u.id} value={u.name}>
-                    {u.name} ({u.acronym}) - {u.location}
-                  </option>
-                ))}
-                <option value="Pacific Adventist University (PAU)">Pacific Adventist University (PAU) - Koiari Park</option>
-                <option value="Sonoma Adventist College">Sonoma Adventist College - Kokopo, ENBP</option>
-                <option value="National Polytechnic Institute of PNG">National Polytechnic Institute of PNG - Lae</option>
-                <option value="Custom Tertiary Institution">Other PNG Tertiary College / Institute</option>
-              </select>
+              />
             </div>
 
             {/* Representative Details */}

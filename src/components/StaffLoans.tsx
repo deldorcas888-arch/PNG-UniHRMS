@@ -192,7 +192,7 @@ export const StaffLoans: React.FC<StaffLoansProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Loan Type:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Loan Type:</span>
               <select
                 value={selectedTypeFilter}
                 onChange={(e) => setSelectedTypeFilter(e.target.value)}
@@ -208,7 +208,7 @@ export const StaffLoans: React.FC<StaffLoansProps> = ({
             </div>
 
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 font-medium">Status:</span>
+              <span className="text-neutral-500 font-medium shrink-0">Status:</span>
               <select
                 value={selectedStatusFilter}
                 onChange={(e) => setSelectedStatusFilter(e.target.value)}
@@ -500,7 +500,7 @@ export const StaffLoans: React.FC<StaffLoansProps> = ({
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Loan / Advance Scheme</label>
                   <select
@@ -531,7 +531,7 @@ export const StaffLoans: React.FC<StaffLoansProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-neutral-700 font-medium mb-1">Repayment Term (Fortnights)</label>
                   <select
