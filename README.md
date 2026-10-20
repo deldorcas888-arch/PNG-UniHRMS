@@ -1,8 +1,8 @@
-# PNG UniHR — University HRMS & Staff Operations System
+# UNRE HR — University HRMS & Staff Operations System
 
-A specialized, comprehensive Human Resource Management and Staff Operations Web Application tailored for Papua New Guinea tertiary institutions (UPNG, PNG UNITECH, University of Goroka, Divine Word University, UNRE, and Western Pacific University).
+A Human Resource Management and Staff Operations application for the University of Natural Resources and Environment (UNRE), Vudal Campus, East New Britain.
 
-Designed to address university HR governance, national statutory compliance (PNG IRC Salary Wages Tax, Nambawan Super / Nasfund), employee self-service, recruitment, digital contracting, approvals, performance appraisals, and institutional integration inquiries.
+Designed to address university HR governance, national statutory compliance (PNG IRC Salary Wages Tax, Nambawan Super / Nasfund), employee self-service, recruitment, digital contracting, approvals, performance appraisals.
 
 ---
 
@@ -14,10 +14,13 @@ The system enforces strict permission boundaries with three distinct operational
 * **HR Manager (Administrative Access)**: Access to payroll runs, employee records, leave administration, loan approvals, job postings, candidate pipelines, contract issuance, council seal execution, onboarding checklists, offboarding clearances, and reporting.
 * **Employee (Self-Service Access)**: Restricted view providing personal staff records, individual payslip breakdowns, personal leave application and balance monitoring, staff loan applications, vacancy applications, candidate contract reviews and digital signature, personal attendance/timesheet logging, and annual self-appraisal submissions. Protected against accessing confidential compensation data of other faculty members.
 
-#### Pre-Configured Simulation Personas:
-* **Administrator**: Dr. Pulapa Subbarao (`admin-1`) — Registrar / Chief University Administrator
-* **HR Manager**: Maryanne Kuman (`hrm-1`) — Senior HR Director & Staff Welfare Officer
-* **Employee**: Dr. Samuel Karani (`emp-1`) — Senior Lecturer in Distributed Systems (School of Natural & Physical Sciences)
+#### Staff account setup
+
+The portal requires Netlify Identity authentication. In the Netlify dashboard, open Identity and invite the first administrator, then assign the `admin` role to that account. The invitation link lets the user choose a password. HR officers use the `hr-manager` role. Accounts without either role receive Employee access and must be linked to their staff record through server-managed `app_metadata.staff_id` (or a matching staff email). Roles cannot be changed in the portal.
+
+Set registration to **Invite only** in Project configuration → Identity for university-managed access. The portal includes sign in, password recovery, invitation acceptance and logout. All application entry pages require a session. Identity authentication requires the Netlify-hosted site; GitHub Pages alone cannot provide the Identity endpoint.
+
+The existing HR records are demonstration data held in React state. This change adds account authentication; it does not turn those records into a persistent production HR database.
 
 ---
 
@@ -93,26 +96,13 @@ Comprehensive reporting engine with date range filters (presets + custom pickers
 
 ---
 
-### 7. University Integration & Contact Portal
-* Built for PNG and Pacific tertiary institutions (UPNG, PNG UNITECH, UOG, DWU, UNRE, WPU, PAU, Polytechs) seeking to deploy the system.
-* **Interactive Implementation Inquiry**:
-  - Select institution, staff cohort size (e.g., 250–500, 1,200+), target go-live fortnight, and desired modules.
-  - Hosting preference selection: On-Premises Campus Server vs. NICTA PNG Government Cloud.
-  - Immediate readiness score calculation, estimated timeline, and automated implementation roadmap.
-* **Direct Creator Contact**:
-  - **Email**: `ddel@emtv.com.pg`
-  - **Division**: EMTV / PNG Tertiary Systems Division
-  - 24-hour consultation response guarantee.
-
----
-
 ## Technical Stack
 
 * **Framework**: React 19 (TypeScript)
 * **Build Tool**: Vite
 * **Styling**: Tailwind CSS
 * **Icons**: Lucide React
-* **State Management**: React state hooks with persistent multi-university and multi-persona simulation models
+* **State Management**: React state hooks for demonstration HR data; Netlify Identity for staff accounts
 
 ---
 
@@ -133,14 +123,13 @@ The web application is equipped with standalone, search-optimized HTML pages wit
 | `performance.html` | **Academic Appraisals & Reviews — PNG UniHR** | Academic reviews, teaching ratings & promotion recommendations |
 | `faculty.html` | **Faculty & Staff Directory — PNG UniHR** | Academic personnel database & departmental rosters |
 | `reports.html` | **Statutory & Audit Reports — PNG UniHR** | IRC SWT tax audits, Super remittances & DHERST subvention exports |
-| `integration.html` | **University Integration Portal — PNG UniHR** | Multi-campus deployment & NICTA Government Cloud integration |
 | `404.html` | **PNG UniHR — Page Not Found & Route Recovery** | GitHub Pages single-page route recovery & navigation directory |
 
 ### GitHub Pages Setup
 1. In your GitHub repository, navigate to **Settings > Pages**.
 2. Under **Build and deployment > Source**, select either:
    - **GitHub Actions** (using the included `.github/workflows/pages.yml`), or
-   - **Deploy from a branch** > branch: `main` / folder: `/docs` (or `/root`).
+   - **Deploy from a branch** > branch: `main` / folder: `/docs`.
 3. Assets use relative base paths (`./`) ensuring all pages and scripts load properly on any repository subfolder.
 
 ---
