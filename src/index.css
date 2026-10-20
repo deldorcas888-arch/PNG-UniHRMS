@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 @layer base {
+  html, body, #root {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  html, body {
+    /* Contain page overflow without making a scroll container for sticky UI. */
+    overflow-x: clip;
+  }
   html {
     -webkit-text-size-adjust: 100%;
   }
